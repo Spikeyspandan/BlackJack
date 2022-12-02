@@ -1,0 +1,93 @@
+prefix = /usr/local
+exec_prefix = ${prefix}
+datarootdir = ${prefix}/share
+INSTALL = /usr/bin/install -c
+EXEEXT = 
+WINDRES = 
+SETFILE = SetFile
+NM = nm
+BK_DEPS = /Users/rmak/wxWidgets-3.0.5/build-cocoa-debug/bk-deps
+srcdir = .
+LIBS = -lz -lpthread -liconv -llzma
+LDFLAGS_GUI = 
+CXX = g++
+CXXFLAGS = -DWX_PRECOMP -g -O0 -fno-common -fvisibility=hidden -fvisibility-inlines-hidden
+CPPFLAGS = -std=c++0x -D__WXOSX_COCOA__ -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES=1 -DWX_PRECOMP -I/usr/local/Cellar/wxmac/3.0.5.1_1/lib/wx/include/osx_cocoa-unicode-3.0 -I/usr/local/Cellar/wxmac/3.0.5.1_1/include/wx-3.0 -O0 -g3 -Wall -mmacosx-version-min=10.14 -c
+LDFLAGS =  -L/usr/local/Cellar/wxmac/3.0.5.1_1/lib -mmacosx-version-min=10.14 -framework IOKit -framework Carbon -framework Cocoa -framework AudioToolbox -framework System -framework OpenGL 
+WX_LIB_FLAVOUR = 
+TOOLKIT = OSX_COCOA
+TOOLKIT_LOWERCASE = osx_cocoa
+TOOLKIT_VERSION = 
+TOOLCHAIN_FULLNAME = osx_cocoa-unicode-3.0
+EXTRALIBS =   -framework IOKit -framework Carbon -framework Cocoa -framework AudioToolbox -framework System -framework OpenGL  -lz -lpthread -liconv -llzma 
+EXTRALIBS_XML =  -lexpat
+EXTRALIBS_GUI = 
+CXXWARNINGS = -Wall -Wundef -Wunused-parameter -Wno-ctor-dtor-privacy -Woverloaded-virtual -Wno-deprecated-declarations
+HOST_SUFFIX = 
+SAMPLES_RPATH_FLAG = 
+
+### Variables: ###
+
+DESTDIR = 
+WX_RELEASE = 3.0
+WX_VERSION = $(WX_RELEASE).4
+LIBDIRNAME = /usr/local/Cellar/wxmac/3.0.5.1_1/lib
+buttondemo_CXXFLAGS = -D__WX$(TOOLKIT)__ $(__WXUNIV_DEFINE_p) $(__DEBUG_DEFINE_p) \
+	$(__EXCEPTIONS_DEFINE_p) $(__RTTI_DEFINE_p) $(__THREAD_DEFINE_p) \
+	-I$(srcdir) $(__DLLFLAG_p) -I$(srcdir)/../../samples $(CXXWARNINGS) \
+	$(CPPFLAGS) $(CXXFLAGS)
+buttondemo_OBJECTS =  \
+	$(__buttondemo___win32rc) \
+	$(__buttondemo_os2_lib_res) \
+	ButtonDemo.o \
+        ButtonPanel.o \
+        Choice.o \
+        DemoFrame.o
+
+### Conditionally set variables: ###
+
+CXXC = $(BK_DEPS) $(CXX)
+PORTNAME = $(TOOLKIT_LOWERCASE)$(TOOLKIT_VERSION)
+WXUNICODEFLAG = u
+EXTRALIBS_FOR_BASE = $(EXTRALIBS)
+EXTRALIBS_FOR_GUI = $(EXTRALIBS_GUI)
+__buttondemo___mac_setfilecmd = \
+	$(SETFILE) -t APPL buttondemo$(EXEEXT)
+__DLLFLAG_p = -DWXUSINGDLL
+__DLLFLAG_p_2 = --define WXUSINGDLL
+COND_PLATFORM_OS2_1___buttondemo___os2_emxbindcmd = $(NM) buttondemo$(EXEEXT) | if grep \
+	-q pmwin.763 ; then emxbind -ep buttondemo$(EXEEXT) ; fi
+__buttondemo_app_Contents_PkgInfo___depname \
+	= buttondemo.app/Contents/PkgInfo
+__buttondemo_bundle___depname = buttondemo_bundle
+____buttondemo_BUNDLE_TGT_REF_DEP \
+	= $(__buttondemo_app_Contents_PkgInfo___depname)
+COND_MONOLITHIC_0___WXLIB_CORE_p = \
+	-lwx_$(PORTNAME)$(WXUNIVNAME)$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(WX_LIB_FLAVOUR)_core-$(WX_RELEASE)$(HOST_SUFFIX)
+__WXLIB_CORE_p = $(COND_MONOLITHIC_0___WXLIB_CORE_p)
+COND_MONOLITHIC_0___WXLIB_BASE_p = \
+	-lwx_base$(WXBASEPORT)$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(WX_LIB_FLAVOUR)-$(WX_RELEASE)$(HOST_SUFFIX)
+__WXLIB_BASE_p = $(COND_MONOLITHIC_0___WXLIB_BASE_p)
+COND_MONOLITHIC_1___WXLIB_MONO_p = \
+	-lwx_$(PORTNAME)$(WXUNIVNAME)$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(WX_LIB_FLAVOUR)-$(WX_RELEASE)$(HOST_SUFFIX)
+COND_wxUSE_REGEX_builtin___LIB_REGEX_p = \
+	-lwxregex$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(WX_LIB_FLAVOUR)-$(WX_RELEASE)$(HOST_SUFFIX)
+
+### Targets: ###
+
+all: buttondemo$(EXEEXT)s
+
+clean: 
+	rm -rf ./.deps ./.pch
+	rm -f ./*.o
+	rm -f buttondemo$(EXEEXT)
+	rm -rf buttondemo.app
+
+buttondemo$(EXEEXT): $(buttondemo_OBJECTS) $(__buttondemo___win32rc)
+	$(CXX) -o $@ $(buttondemo_OBJECTS)    -L$(LIBDIRNAME) $(LDFLAGS_GUI) $(SAMPLES_RPATH_FLAG) $(LDFLAGS)  $(__WXLIB_CORE_p)  $(__WXLIB_BASE_p)  $(__WXLIB_MONO_p) $(__LIB_SCINTILLA_IF_MONO_p) $(__LIB_TIFF_p) $(__LIB_JPEG_p) $(__LIB_PNG_p)  $(EXTRALIBS_FOR_GUI) $(__LIB_ZLIB_p) $(__LIB_REGEX_p) $(__LIB_EXPAT_p) $(EXTRALIBS_FOR_BASE) $(LIBS)
+	
+	$(__buttondemo___mac_setfilecmd)
+	$(__buttondemo___os2_emxbindcmd)
+
+buttondemo_buttondemo.o: $(srcdir)/buttondemo.cpp
+	$(CXXC) -c -o $@ $(buttondemo_CXXFLAGS) $(srcdir)/buttondemo.cpp
